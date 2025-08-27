@@ -478,35 +478,13 @@
 
 
 
-// 页面加载完成后自动执行
 document.addEventListener('DOMContentLoaded', function() {
-  // 1. 定位到“豆瓣热门推荐”的文字标签
+  // 定位“豆瓣热门推荐”标签并模拟点击
   const labelElem = document.querySelector('label:text("豆瓣热门推荐")');
-  if (!labelElem) {
-    console.log('❌ 未找到“豆瓣热门推荐”标签');
-    return;
-  }
-
-  // 2. 找到标签关联的复选框/开关（通过label的for属性或父级容器）
-  let targetSwitch;
-  // 方式A：通过label的for属性关联（标准写法）
-  if (labelElem.getAttribute('for')) {
-    targetSwitch = document.getElementById(labelElem.getAttribute('for'));
-  } 
-  // 方式B：若开关在label内部（常见于自定义组件）
-  else {
-    targetSwitch = labelElem.querySelector('input[type="checkbox"], input[type="radio"]');
-  }
-
-  // 3. 若找到开关，自动勾选（开启功能）
-  if (targetSwitch && !targetSwitch.checked) {
-    targetSwitch.checked = true;
-    // 触发开关的change事件（避免部分页面未监听checked状态变化）
-    targetSwitch.dispatchEvent(new Event('change', { bubbles: true }));
-    console.log('✅ 已自动开启“豆瓣热门推荐”（勾选开关）');
-  } else if (targetSwitch && targetSwitch.checked) {
-    console.log('ℹ️ “豆瓣热门推荐”已处于开启状态');
+  if (labelElem) {
+    labelElem.click();
+    console.log('✅ 已自动点击“豆瓣热门推荐”标签');
   } else {
-    console.log('❌ 未找到标签关联的开关/复选框');
+    console.log('❌ 未找到“豆瓣热门推荐”标签');
   }
 });
