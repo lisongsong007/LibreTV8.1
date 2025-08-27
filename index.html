@@ -455,7 +455,7 @@
 
 <body>
   <!-- 页面原有内容 -->
-  <button onclick="selectAllAPIs(true)" class="px-2 py-1 bg-[#333] hover:bg-[#444] text-white text-xs rounded">全选</button>
+  <button onclick="selectAllAPIs(true)" class="px-2 py-1 bg-[#333] hover:bg-[#444] text-white text-xs rounded"></button>
   
   <!-- 粘贴自动运行代码 -->
   <script>
@@ -478,13 +478,49 @@
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  // 定位“豆瓣热门推荐”标签并模拟点击
-  const labelElem = document.querySelector('label:text("豆瓣热门推荐")');
-  if (labelElem) {
-    labelElem.click();
-    console.log('✅ 已自动点击“豆瓣热门推荐”标签');
+<!-- 需将此代码放在页面的 <body> 标签末尾（确保目标元素已渲染） -->
+<script>
+// 页面DOM加载完成后，自动执行“开启豆瓣热门推荐”操作
+document.addEventListener('DOMContentLoaded', function autoEnableDoubanRecommend() {
+  // 1. 精准定位“豆瓣热门推荐”标签（匹配文本和样式特征）
+  const recommendLabel = Array.from(document.querySelectorAll('label.text-sm.font-medium.text-gray-400'))
+    .find(label => label.textContent.trim() === '豆瓣热门推荐');
+
+  if (!recommendLabel) {
+    console.log('❌ 未找到“豆瓣热门推荐”标签，无法执行操作');
+    return;
+  }
+
+  // 2. 查找标签关联的开关/复选框（覆盖两种常见关联方式）
+  let toggleSwitch;
+  // 方式1：通过label的“for”属性关联到指定ID的开关
+  const forAttr = recommendLabel.getAttribute('for');
+  if (forAttr) {
+    toggleSwitch = document.getElementById(forAttr);
+  } 
+  // 方式2：开关嵌套在label内部（自定义组件常见写法）
+  else {
+    toggleSwitch = recommendLabel.querySelector('input[type="checkbox"], input[type="radio"]');
+  }
+
+  // 3. 自动开启功能（勾选开关并触发必要事件）
+  if (toggleSwitch) {
+    // 仅当开关未勾选时执行操作
+    if (!toggleSwitch.checked) {
+      toggleSwitch.checked = true;
+      // 触发“change”事件（解决部分页面不监听checked状态变化的问题）
+      toggleSwitch.dispatchEvent(new Event('change', { 
+        bubbles: true, 
+        cancelable: true 
+      }));
+      console.log('✅ 已自动开启“豆瓣热门推荐”功能');
+    } else {
+      console.log('ℹ️ “豆瓣热门推荐”已处于开启状态，无需重复操作');
+    }
   } else {
-    console.log('❌ 未找到“豆瓣热门推荐”标签');
+    // 若未找到开关，尝试直接点击标签（兼容点击文字触发的场景）
+    recommendLabel.click();
+    console.log('✅ 已自动点击“豆瓣热门推荐”标签（触发文字点击事件）');
   }
 });
+</script>
