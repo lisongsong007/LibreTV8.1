@@ -1,5 +1,5 @@
 /*
-
+注释全部
 // 添加动画样式
 (function() {
     const style = document.createElement('style');
