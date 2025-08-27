@@ -443,3 +443,26 @@
     <script src="js/index-page.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+<body>
+  <!-- 页面原有内容 -->
+  <button onclick="selectAllAPIs(true)" class="px-2 py-1 bg-[#333] hover:bg-[#444] text-white text-xs rounded">全选</button>
+  
+  <!-- 粘贴自动运行代码 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof selectAllAPIs === 'function') {
+        selectAllAPIs(true);
+        console.log("✅ 全选功能已自动运行");
+      } else {
+        const targetBtn = document.querySelector('button[onclick="selectAllAPIs(true)"].px-2.py-1.bg-\\[#333\\].text-white.text-xs.rounded');
+        targetBtn ? (targetBtn.click(), console.log("✅ 全选按钮已自动点击")) : console.log("❌ 未找到目标按钮");
+      }
+    });
+  </script>
+</body>
