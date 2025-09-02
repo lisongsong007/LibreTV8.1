@@ -527,26 +527,3 @@ document.addEventListener('DOMContentLoaded', function autoEnableDoubanRecommend
 
 
 
-
-<!-- 自动滚动到底部逻辑 + 模态框控制函数 -->
-    <script>
-        // 内容区自动滚到底部
-        function scrollToModalBottom() {
-            const contentDiv = document.getElementById('modalContent');
-            if (contentDiv) contentDiv.scrollTop = contentDiv.scrollHeight;
-        }
-
-        // 打开模态框（打开时自动滚到底）
-        function openModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.replace('hidden', 'flex');
-            scrollToModalBottom();
-        }
-
-        // 关闭模态框
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.replace('flex', 'hidden');
-        }
-    </script>
-</div>
