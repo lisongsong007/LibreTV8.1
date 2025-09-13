@@ -127,11 +127,11 @@ const API_SITES = {
     // 这些影片和背后的产业已经使数百万男女“下海”，出卖自己的身体，甚至以此为生计。
     // 而作为观众无辜吗？毫无疑问，他们促成了黄色产业链的再生产。
     // 我们提供此警告，是希望您能认清这些内容的本质——它们是压迫和奴役的工具，而非娱乐。
-     ckzy: {
-         api: 'https://www.ckzy1.com',
-         name: 'CK资源',
-         adult: true
-     },
+    //  ckzy: {
+    //      api: 'https://www.ckzy1.com',
+    //     name: 'CK资源',
+    //   adult: true
+    //  },
     // jkun: {
     //     api: 'https://jkunzyapi.com',
     //     name: 'jkun资源',
@@ -170,18 +170,18 @@ const API_SITES = {
     // },
 
     // 下面是资源失效率高的API源，不建议使用
-    // subo: {
-    //     api: 'https://subocaiji.com/api.php/provide/vod',
-    //     name: '速播资源'
-    // },
-    // fczy: {
-    //     api: 'https://api.fczy888.me/api.php/provide/vod',
-    //     name: '蜂巢资源'
-    // },
-    // ukzy: {
-    //     api: 'https://api.ukuapi88.com/api.php/provide/vod',
-    //     name: 'U酷资源'
-    // },
+     subo: {
+         api: 'https://subocaiji.com/api.php/provide/vod',
+         name: '速播资源'
+     },
+     fczy: {
+         api: 'https://api.fczy888.me/api.php/provide/vod',
+         name: '蜂巢资源'
+     },
+     ukzy: {
+         api: 'https://api.ukuapi88.com/api.php/provide/vod',
+         name: 'U酷资源'
+     },
 };
 
 // 定义合并方法
@@ -197,7 +197,7 @@ window.extendAPISites = extendAPISites;
 // 添加聚合搜索的配置选项
 const AGGREGATED_SEARCH_CONFIG = {
     enabled: true,             // 是否启用聚合搜索
-    timeout: 8000,            // 单个源超时时间（毫秒）
+    timeout: 5000,            // 单个源超时时间（毫秒）
     maxResults: 10000,          // 最大结果数量
     parallelRequests: true,   // 是否并行请求所有源
     showSourceBadges: true    // 是否显示来源徽章
