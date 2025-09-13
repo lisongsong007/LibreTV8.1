@@ -20,31 +20,7 @@
         <div class="loading-animation"></div>
         <div class="redirect-message">正在加载播放器...</div>
         <div id="redirect-status">准备视频数据中，请稍候...</div>
-        <p class="redirect-hint"><a href="player.html" id="manual-redirect"></a></p>
+        <p class="redirect-hint">如果页面没有自动跳转，请<a href="player.html" id="manual-redirect">点击这里</a></p>
     </div>
-</body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <!--  -->
-    <p class="redirect-hint"><a href="player.html" id="manual-redirect"></a></p>
-
-    <script>
-        // 页面加载完成后，延迟指定时间自动跳转（单位：毫秒，1000毫秒=1秒）
-        window.onload = function() {
-            // 设置3秒后自动跳转到 player.html
-            setTimeout(function() {
-                window.location.href = "player.html"; // 核心跳转代码
-            }, 3000); 
-        };
-    </script>
 </body>
 </html>
