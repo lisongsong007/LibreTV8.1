@@ -528,3 +528,46 @@ document.addEventListener('DOMContentLoaded', function autoEnableDoubanRecommend
 
 
 
+// 原有视频数据请求逻辑（8.1分支大概率是这样的请求方式）
+async function fetchVideos(query = '') {
+  const url = `/api/search?query=${encodeURIComponent(query)}`;
+  const res = await fetch(url);
+  const videos = await res.json();
+  renderVideoList(videos);
+  // 新增：注入结构化数据
+  import('./prerender.js').then(mod => {
+    mod.injectVideoStructuredData(videos);
+  });
+  return videos;
+}
+
+// 原有视频列表渲染函数
+function renderVideoList(videos) {
+  const videoList = document.querySelector('.video-list');
+  videoList.innerHTML = '';
+  videos.forEach(video => {
+    const videoItem = document.createElement('div');
+    videoItem.className = 'video-item';
+    videoItem.innerHTML = `
+      <img src="${video.cover}" alt="${video.title}">
+      <h3>${video.title}</h3>
+    `;
+    videoList.appendChild(videoItem);
+  });
+}
+
+// 页面加载时执行
+document.addEventListener('DOMContentLoaded', async () => {
+  const videos = await fetchVideos();
+  // 新增：适配爬虫预渲染
+  import('./prerender.js').then(mod => {
+    if (mod.isCrawler()) {
+      mod.waitContentLoaded(() => {
+        window.prerenderReady = true;
+      });
+    }
+  });
+  // 原有搜索框等交互逻辑...
+});
+
+
